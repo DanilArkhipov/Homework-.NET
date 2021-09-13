@@ -2,11 +2,12 @@
 
 namespace hw1
 {
-    internal static class Parser
+    public static class Parser
     {
-        private const int WrongArgsLength = 1;
-        private const int WrongArgFormat = 2;
-        private const int WrongOperation = 3;
+        public const int AllCorrect = 0;
+        public const int WrongArgsLength = 1;
+        public const int WrongArgFormat = 2;
+        public const int WrongOperation = 3;
 
         private static bool CheckArgsLength(string[] args)
         {
@@ -19,7 +20,7 @@ namespace hw1
             return false;
         }
 
-        internal static int TryParseArgs(string[] args, out Operation operation, out int val1, out int val2)
+        public static int TryParseArgs(string[] args, out int val1, out Operation operation, out int val2)
         {
             operation = default;
             val1 = default;
@@ -30,8 +31,7 @@ namespace hw1
                 return WrongArgsLength;
             }
 
-            var isOperation = TryParseOperation(args[1], out operation);
-            if (!isOperation)
+            if (!TryParseOperation(args[1], out operation))
             {
                 return WrongOperation;
             }

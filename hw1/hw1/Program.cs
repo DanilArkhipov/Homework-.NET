@@ -2,11 +2,11 @@
 
 namespace hw1
 {
-    internal class Program
+    public class Program
     {
-        private static int Main(string[] args)
+        public static int Main(string[] args)
         {
-            var codeOfParsing = Parser.TryParseArgs(args, out var operation, out var val1, out var val2);
+            var codeOfParsing = Parser.TryParseArgs(args, out var val1, out var operation, out var val2);
             if (codeOfParsing != 0)
             {
                 return codeOfParsing;
