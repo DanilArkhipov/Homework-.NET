@@ -5,21 +5,21 @@
         Plus,
         Minus,
         Multiply,
-        Divide
+        Divide,
+        IncorrectOperation
     }
 
     public static class Calculator
     {
-        public static int Calculate(int val1, Operation operation, int val2)
+        public static double Calculate(int val1, Operation operation, int val2)
         {
-            var result = operation switch
+            return operation switch
             {
                 Operation.Plus => val1 + val2,
                 Operation.Minus => val1 - val2,
                 Operation.Multiply => val1 * val2,
                 Operation.Divide => val1 / val2,
             };
-            return result;
         }
     }
 }
