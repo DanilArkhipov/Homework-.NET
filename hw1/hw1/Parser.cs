@@ -41,29 +41,26 @@ namespace hw1
                 return WrongArgFormat;
             }
 
-            return 0;
+            return AllCorrect;
         }
 
         private static bool TryParseOperation(string arg, out Operation operation)
         {
-            var numOperation = arg switch
+            operation = arg switch
             {
-                "+" => 0,
-                "-" => 1,
-                "*" => 2,
-                "/" => 3,
-                _ => 4
+                "+" => Operation.Plus,
+                "-" => Operation.Minus,
+                "*" => Operation.Multiply,
+                "/" => Operation.Divide,
+                _ => Operation.IncorrectOperation
             };
-            var isOperation = numOperation < 4;
+            var isOperation = operation is not Operation.IncorrectOperation;
             if (!isOperation)
             {
                 Console.WriteLine($"Unsupported operation received: {arg}");
-                operation = default;
-                return false;
             }
 
-            operation = (Operation) numOperation;
-            return true;
+            return isOperation;
         }
 
         private static bool TryParseValue(string arg, out int val)
