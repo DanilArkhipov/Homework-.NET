@@ -20,28 +20,28 @@ namespace hw1
             return false;
         }
 
-        public static int TryParseArgs(string[] args, out int val1, out Operation operation, out int val2)
+        public static bool TryParseArgs(string[] args, out int val1, out Operation operation, out int val2,
+                                        out int resultCode)
         {
             operation = default;
             val1 = default;
             val2 = default;
+            resultCode = AllCorrect;
 
             if (!CheckArgsLength(args))
             {
-                return WrongArgsLength;
+                resultCode = WrongArgsLength;
             }
-
-            if (!TryParseOperation(args[1], out operation))
+            else if (!TryParseOperation(args[1], out operation))
             {
-                return WrongOperation;
+                resultCode = WrongOperation;
             }
-
-            if (!TryParseValue(args[0], out val1) || !TryParseValue(args[2], out val2))
+            else if (!TryParseValue(args[0], out val1) || !TryParseValue(args[2], out val2))
             {
-                return WrongArgFormat;
+                resultCode = WrongArgFormat;
             }
 
-            return AllCorrect;
+            return resultCode is AllCorrect;
         }
 
         private static bool TryParseOperation(string arg, out Operation operation)

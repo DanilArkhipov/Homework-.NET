@@ -2,19 +2,23 @@
 
 namespace hw1
 {
-    public class Program
+    public static class Program
     {
         public static int Main(string[] args)
         {
-            var codeOfParsing = Parser.TryParseArgs(args, out var val1, out var operation, out var val2);
-            if (codeOfParsing != 0)
+            var argsAreCorrect = Parser.TryParseArgs(
+                args,
+                out var val1,
+                out var operation,
+                out var val2,
+                out var codeOfParsing);
+            if (argsAreCorrect)
             {
-                return codeOfParsing;
+                var result = Calculator.Calculate(val1, operation, val2);
+                Console.WriteLine($"Result is {result}");
             }
 
-            var result = Calculator.Calculate(val1, operation, val2);
-            Console.WriteLine($"Result is {result}");
-            return 0;
+            return codeOfParsing;
         }
     }
 }
