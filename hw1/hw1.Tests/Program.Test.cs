@@ -8,13 +8,13 @@ namespace Tests
         [Fact]
         public void WhenArgsIncorrect()
         {
-            Assert.False(Program.Main(new[]{"1", "+"}) == 0);
+            Assert.False(Program.Main(new[]{"1", "+"}) == Parser.AllCorrect);
         }
 
         [Fact]
         public void WhenArgsCorrect()
         {
-            Assert.True(Program.Main(new[]{"1", "+", "2"}) == 0);
+            Assert.True(Program.Main(new[]{"1", "+", "2"}) == Parser.AllCorrect);
         }
     }
 }
