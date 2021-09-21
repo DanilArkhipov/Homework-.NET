@@ -2,14 +2,10 @@
   hw2.Parser
     extends System.Object
 {
-
-  .field public static literal int32 AllCorrect = int32(0) // 0x00000000
-
-  .field public static literal int32 WrongArgsLength = int32(1) // 0x00000001
-
-  .field public static literal int32 WrongArgFormat = int32(2) // 0x00000002
-
-  .field public static literal int32 WrongOperation = int32(3) // 0x00000003
+  .field public static literal int32 AllCorrect = int32(0)
+  .field public static literal int32 WrongArgsLength = int32(1)
+  .field public static literal int32 WrongArgFormat = int32(2)
+  .field public static literal int32 WrongOperation = int32(3)
 
   .method private hidebysig static bool
     CheckArgsLength(
@@ -22,9 +18,6 @@
       [1] bool V_1
     )
 
-    // [13 9 - 13 10]
-    IL_0000: nop
-
     // [14 13 - 14 34]
     IL_0001: ldarg.0      // args
     IL_0002: ldlen
@@ -35,9 +28,6 @@
 
     IL_0008: ldloc.0      // V_0
     IL_0009: brfalse.s    IL_0010
-
-    // [15 13 - 15 14]
-    IL_000b: nop
 
     // [16 17 - 16 29]
     IL_000c: ldc.i4.1
@@ -52,7 +42,6 @@
     IL_0018: box          [System.Runtime]System.Int32
     IL_001d: call         string [System.Runtime]System.String::Format(string, object)
     IL_0022: call         void [System.Console]System.Console::WriteLine(string)
-    IL_0027: nop
 
     // [20 13 - 20 26]
     IL_0028: ldc.i4.0
@@ -81,9 +70,6 @@
       [2] bool V_2,
       [3] bool V_3
     )
-
-    // [25 9 - 25 10]
-    IL_0000: nop
 
     // [26 13 - 26 33]
     IL_0001: ldarg.2      // operation
@@ -115,16 +101,10 @@
     IL_0018: ldloc.0      // V_0
     IL_0019: brfalse.s    IL_0023
 
-    // [32 13 - 32 14]
-    IL_001b: nop
-
     // [33 17 - 33 46]
     IL_001c: ldarg.s      resultCode
     IL_001e: ldc.i4.1
     IL_001f: stind.i4
-
-    // [34 13 - 34 14]
-    IL_0020: nop
 
     IL_0021: br.s         IL_005f
 
@@ -141,16 +121,10 @@
     IL_0030: ldloc.1      // V_1
     IL_0031: brfalse.s    IL_003b
 
-    // [36 13 - 36 14]
-    IL_0033: nop
-
     // [37 17 - 37 45]
     IL_0034: ldarg.s      resultCode
     IL_0036: ldc.i4.3
     IL_0037: stind.i4
-
-    // [38 13 - 38 14]
-    IL_0038: nop
 
     IL_0039: br.s         IL_005f
 
@@ -175,16 +149,10 @@
     IL_0056: ldloc.2      // V_2
     IL_0057: brfalse.s    IL_005f
 
-    // [40 13 - 40 14]
-    IL_0059: nop
-
     // [41 17 - 41 45]
     IL_005a: ldarg.s      resultCode
     IL_005c: ldc.i4.2
     IL_005d: stind.i4
-
-    // [42 13 - 42 14]
-    IL_005e: nop
 
     // [44 13 - 44 45]
     IL_005f: ldarg.s      resultCode
@@ -214,15 +182,9 @@
       [3] bool V_3
     )
 
-    // [48 9 - 48 10]
-    IL_0000: nop
-
     // [49 13 - 56 15]
     IL_0001: ldc.i4.1
     IL_0002: brtrue.s     IL_0005
-
-    // [49 29 - 56 14]
-    IL_0004: nop
 
     IL_0005: ldarg.0      // arg
     IL_0006: ldstr        "+"
@@ -270,9 +232,6 @@
     IL_004f: ldc.i4.1
     IL_0050: brtrue.s     IL_0053
 
-    // [49 13 - 56 15]
-    IL_0052: nop
-
     IL_0053: ldarg.1      // operation
     IL_0054: ldloc.1      // V_1
     IL_0055: stind.i4
@@ -295,18 +254,11 @@
     IL_0064: ldloc.2      // V_2
     IL_0065: brfalse.s    IL_007a
 
-    // [59 13 - 59 14]
-    IL_0067: nop
-
     // [60 17 - 60 77]
     IL_0068: ldstr        "Unsupported operation received: "
     IL_006d: ldarg.0      // arg
     IL_006e: call         string [System.Runtime]System.String::Concat(string, string)
     IL_0073: call         void [System.Console]System.Console::WriteLine(string)
-    IL_0078: nop
-
-    // [61 13 - 61 14]
-    IL_0079: nop
 
     // [63 13 - 63 32]
     IL_007a: ldloc.0      // isOperation
@@ -326,51 +278,20 @@
     ) cil managed
   {
     .maxstack 2
-    .locals init (
-      [0] bool isVal,
-      [1] bool V_1,
-      [2] bool V_2
-    )
 
-    // [67 9 - 67 10]
-    IL_0000: nop
+    ldarg.0
+    ldarg.1
+    call bool [System.Runtime]System.Int32::TryParse(string, int32&)
+    brtrue.s    isVal
 
-    // [68 13 - 68 52]
-    IL_0001: ldarg.0      // arg
-    IL_0002: ldarg.1      // val
-    IL_0003: call         bool [System.Runtime]System.Int32::TryParse(string, int32&)
-    IL_0008: stloc.0      // isVal
+    isNotVal: ldstr "Value is not int: "
+    ldarg.0
+    call string [System.Runtime]System.String::Concat(string, string)
+    call void [System.Console]System.Console::WriteLine(string)
+    ldc.i4.0
+    ret
 
-    // [69 13 - 69 24]
-    IL_0009: ldloc.0      // isVal
-    IL_000a: ldc.i4.0
-    IL_000b: ceq
-    IL_000d: stloc.1      // V_1
-
-    IL_000e: ldloc.1      // V_1
-    IL_000f: brfalse.s    IL_0024
-
-    // [70 13 - 70 14]
-    IL_0011: nop
-
-    // [71 17 - 71 63]
-    IL_0012: ldstr        "Value is not int: "
-    IL_0017: ldarg.0      // arg
-    IL_0018: call         string [System.Runtime]System.String::Concat(string, string)
-    IL_001d: call         void [System.Console]System.Console::WriteLine(string)
-    IL_0022: nop
-
-    // [72 13 - 72 14]
-    IL_0023: nop
-
-    // [74 13 - 74 26]
-    IL_0024: ldloc.0      // isVal
-    IL_0025: stloc.2      // V_2
-    IL_0026: br.s         IL_0028
-
-    // [75 9 - 75 10]
-    IL_0028: ldloc.2      // V_2
-    IL_0029: ret
-
-  } // end of method Parser::TryParseValue
+    isVal: ldc.i4.1      // isVal
+    ret
+  }
 }
