@@ -7,53 +7,6 @@
   .field public static literal int32 WrongArgFormat = int32(2)
   .field public static literal int32 WrongOperation = int32(3)
 
-  .method private hidebysig static bool
-    CheckArgsLength(
-      string[] args
-    ) cil managed
-  {
-    .maxstack 2
-    .locals init (
-      [0] bool V_0,
-      [1] bool V_1
-    )
-
-    // [14 13 - 14 34]
-    IL_0001: ldarg.0      // args
-    IL_0002: ldlen
-    IL_0003: conv.i4
-    IL_0004: ldc.i4.3
-    IL_0005: ceq
-    IL_0007: stloc.0      // V_0
-
-    IL_0008: ldloc.0      // V_0
-    IL_0009: brfalse.s    IL_0010
-
-    // [16 17 - 16 29]
-    IL_000c: ldc.i4.1
-    IL_000d: stloc.1      // V_1
-    IL_000e: br.s         IL_002c
-
-    // [19 13 - 19 99]
-    IL_0010: ldstr        "The program requires 3 CLI arguments but {0} provided"
-    IL_0015: ldarg.0      // args
-    IL_0016: ldlen
-    IL_0017: conv.i4
-    IL_0018: box          [System.Runtime]System.Int32
-    IL_001d: call         string [System.Runtime]System.String::Format(string, object)
-    IL_0022: call         void [System.Console]System.Console::WriteLine(string)
-
-    // [20 13 - 20 26]
-    IL_0028: ldc.i4.0
-    IL_0029: stloc.1      // V_1
-    IL_002a: br.s         IL_002c
-
-    // [21 9 - 21 10]
-    IL_002c: ldloc.1      // V_1
-    IL_002d: ret
-
-  } // end of method Parser::CheckArgsLength
-
   .method public hidebysig static bool
     TryParseArgs(
       string[] args,
@@ -167,6 +120,33 @@
     IL_0069: ret
 
   } // end of method Parser::TryParseArgs
+
+  .method private hidebysig static bool
+    CheckArgsLength(
+      string[] args
+    ) cil managed
+  {
+    .maxstack 2
+
+    ldarg.0
+    ldlen
+    conv.i4
+    ldc.i4.3
+    ceq
+    brfalse.s incorrect
+    ldc.i4.1
+    ret
+
+    incorrect: ldstr "The program requires 3 CLI arguments but {0} provided"
+    ldarg.0
+    ldlen
+    conv.i4
+    box          [System.Runtime]System.Int32
+    call         string [System.Runtime]System.String::Format(string, object)
+    call         void [System.Console]System.Console::WriteLine(string)
+    ldc.i4.0
+    ret
+  }
 
   .method private hidebysig static bool
     TryParseOperation(
