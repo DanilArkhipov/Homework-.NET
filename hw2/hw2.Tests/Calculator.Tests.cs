@@ -9,7 +9,8 @@ namespace hw2.Tests
         [InlineData(3, Operation.Minus, 1, 2)]
         [InlineData(4, Operation.Multiply, 5, 20)]
         [InlineData(36, Operation.Divide, 4, 9)]
-        public void Tests(int val1, Operation operation, int val2, int expectedResult)
+        [InlineData(5, Operation.Divide, 2, 2.5)]
+        public void Tests(int val1, Operation operation, int val2, double expectedResult)
         {
             Assert.Equal(expectedResult, Calculator.Calculate(val1, operation, val2));
         }
