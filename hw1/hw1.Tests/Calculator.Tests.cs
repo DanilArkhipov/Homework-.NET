@@ -1,3 +1,4 @@
+using System;
 using hw1;
 using Xunit;
 
@@ -13,6 +14,12 @@ namespace Tests
         public void Tests(int val1, Operation operation, int val2, int expectedResult)
         {
             Assert.Equal(expectedResult, Calculator.Calculate(val1, operation, val2));
+        }
+
+        [Fact]
+        public void WhenOperationIncorrect()
+        {
+            Assert.Throws<ArgumentException>(() => Calculator.Calculate(5, Operation.IncorrectOperation, 4));
         }
     }
 }

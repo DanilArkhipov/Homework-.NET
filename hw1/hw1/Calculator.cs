@@ -1,4 +1,6 @@
-﻿namespace hw1
+﻿using System;
+
+namespace hw1
 {
     public enum Operation
     {
@@ -18,7 +20,8 @@
                 Operation.Plus => val1 + val2,
                 Operation.Minus => val1 - val2,
                 Operation.Multiply => val1 * val2,
-                Operation.Divide => val1 / val2,
+                Operation.Divide => (double)val1 / (double)val2,
+                Operation.IncorrectOperation => throw new ArgumentException("Incorrect operation")
             };
         }
     }
