@@ -35,26 +35,26 @@
     ldc.i4.0
     stind.i4
 
-    ldarg.s args
+    checkArgsLength: ldarg.s args
     call bool hw2.Parser::CheckArgsLength(string[])
-    brtrue.s correctArgsLength
+    brtrue.s checkOperation
     ldarg.s resultCode
-    ldc.i4.1
+    ldc.i4.1 // WrongArgsLength
     stind.i4
     br.s return
 
-    correctArgsLength: ldarg.s args
+    checkOperation: ldarg.s args
     ldc.i4.1
     ldelem.ref
     ldarg.s operation
     call bool hw2.Parser::TryParseOperation(string, valuetype hw2.Operation&)
-    brtrue.s    correctOperation
+    brtrue.s    checkValues
     ldarg.s resultCode
-    ldc.i4.3
+    ldc.i4.3 // WrongOperation
     stind.i4
     br.s return
 
-    correctOperation: ldarg.s args
+    checkValues: ldarg.s args
     ldc.i4.0
     ldelem.ref
     ldarg.s val1
@@ -68,12 +68,12 @@
     brtrue.s return
 
     IncorrectVal: ldarg.s resultCode
-    ldc.i4.2
+    ldc.i4.2 // WrongArgFormat
     stind.i4
 
     return: ldarg.s resultCode
     ldind.i4
-    ldc.i4.0
+    ldc.i4.0 // AllCorrect
     ceq
     ret
   }
@@ -153,7 +153,7 @@
     Incorrect: ldc.i4.4
     stloc.0
 
-    Asign: ldarg.1
+    Asign:ldarg.1
     ldloc.0
     stind.i4
 
