@@ -9,12 +9,10 @@ let calculate (val1, op, val2) =
     let result = ResultBuilder()
 
     result {
-        let! val11 = val1
-        let! val22 = val2
-        match! op with
-        | Plus -> return val11 + val22
-        | Minus -> return val11 - val22
-        | Multiply -> return val11 * val22
-        | Divide -> let! r = val11 |> divideBy val22
+        match op with
+        | Plus -> return val1 + val2
+        | Minus -> return val1 - val2
+        | Multiply -> return val1 * val2
+        | Divide -> let! r = val1 |> divideBy val2
                     return r
     }
