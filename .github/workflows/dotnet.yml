@@ -27,3 +27,5 @@ jobs:
       uses: codecov/codecov-action@v2.1.0
       with:
         file: Code coverage.xml
+        token: 879c6981-65ca-42af-9a09-f01da9342455
+        
