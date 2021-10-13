@@ -2,7 +2,7 @@ module hw5.Calculator
 
 let calculate (val1, op, val2) =
     let divideBy bottom top =
-        if bottom = double 0
+        if bottom = decimal 0
         then Error "Divide by zero"
         else Ok (top / bottom)
 

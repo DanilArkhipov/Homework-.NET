@@ -1,4 +1,5 @@
 module hw5.Parser
+open System
 open ResultBinder
 
 let parseArgs (args:string[]) =
@@ -23,7 +24,7 @@ let parseArgs (args:string[]) =
 
     let parseValue x =
         try
-            Ok (x |> double)
+            Ok (x |> decimal)
         with
             _ -> Error $"Wrong argument format: {x}"
 
