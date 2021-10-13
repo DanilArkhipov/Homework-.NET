@@ -5,4 +5,6 @@ type ResultBuilder() =
         match x with
         | Ok x -> f x
         | Error e -> Error e
+
     member this.Return(x) = Ok x
+    member this.Zero() = Error "Unknown error"

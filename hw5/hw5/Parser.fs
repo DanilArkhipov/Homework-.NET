@@ -1,16 +1,16 @@
 module hw5.Parser
-open System
+
 open ResultBinder
 
 let parseArgs args =
     let result = ResultBuilder()
 
-    let checkArgsLength (args : string[]) =
+    let checkArgsLength (args: string []) =
         match args.Length with
         | 3 -> Ok args
         | _ -> Error $"3 arguments are required, but %i{args.Length} provided"
 
-    let parseOperation (args : string[]) =
+    let parseOperation (args: string []) =
         result {
             let! operationResult =
                 match args.[1] with
@@ -19,14 +19,15 @@ let parseArgs args =
                 | "*" -> Ok Operation.Multiply
                 | "/" -> Ok Operation.Divide
                 | _ -> Error $"Invalid operation: %s{args.[1]}"
+
             return args.[0], operationResult, args.[2]
         }
 
     let parseValue x =
         try
-            Ok (x |> decimal)
+            Ok(x |> decimal)
         with
-            _ -> Error $"Wrong argument format: {x}"
+        | _ -> Error $"Wrong argument format: {x}"
 
     let parseValues (val1, op, val2) =
         result {

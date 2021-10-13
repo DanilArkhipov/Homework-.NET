@@ -1,4 +1,5 @@
 module hw5.Program
+
 open ResultBinder
 
 let printResult r =
@@ -9,7 +10,9 @@ let printResult r =
 [<EntryPoint>]
 let main argv =
     let result =
-        argv |> Parser.parseArgs
+        argv
+        |> Parser.parseArgs
         >>= Calculator.calculate
+
     printResult result
     0
