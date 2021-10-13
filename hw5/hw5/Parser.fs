@@ -2,10 +2,10 @@ module hw5.Parser
 open System
 open ResultBinder
 
-let parseArgs (args:string[]) =
+let parseArgs args =
     let result = ResultBuilder()
 
-    let checkArgsLength (args:string[]) =
+    let checkArgsLength (args : string[]) =
         match args.Length with
         | 3 -> Ok args
         | _ -> Error $"3 arguments are required, but %i{args.Length} provided"
@@ -28,7 +28,7 @@ let parseArgs (args:string[]) =
         with
             _ -> Error $"Wrong argument format: {x}"
 
-    let parseValues (val1:string, op, val2:string) =
+    let parseValues (val1, op, val2) =
         result {
             let! val11 = parseValue val1
             let! val22 = parseValue val2

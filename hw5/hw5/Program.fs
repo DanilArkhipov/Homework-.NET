@@ -3,7 +3,7 @@ open ResultBinder
 
 let printResult r =
     match r with
-    | Ok x -> printf $"{x}"
+    | Ok x -> printf $"Result is {x}"
     | Error e -> printf $"{e}"
 
 [<EntryPoint>]

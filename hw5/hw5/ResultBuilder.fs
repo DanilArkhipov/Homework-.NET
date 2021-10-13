@@ -1,7 +1,6 @@
 namespace hw5
 
 type ResultBuilder() =
-    member this.Zero() = Error
     member this.Bind(x, f) =
         match x with
         | Ok x -> f x
